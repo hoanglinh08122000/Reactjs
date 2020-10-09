@@ -46,13 +46,25 @@ class App extends Component {
 					image : "https://fptshop.com.vn/Uploads/Originals/2020/5/8/637245524022342857_xiaomi-redmi-note-9-pro-xam-1.png",
 					status: true
 				}
-			]
+			],
+			isActive : true
 		}
 
 	}
 	// onAddProduct(){
 	// 	console.log(this.refs.name.value);
 	// }
+	onSetActive = () => {
+		if (this.state.isActive === true) {
+			this.setState({
+				isActive:false
+			});
+		}else {
+			this.setState({
+				isActive:true
+			})
+		}
+	}
 	render() {
 	
 		// var product = {
@@ -115,7 +127,7 @@ class App extends Component {
 
 		let ListProduct = this.state.Products.map((product, index) => {
 			let result = '';
-			if (product.status){
+			if (this.state.isActive === true){
 				result = <tr key = {index}>
 							<td>{index}</td>
 							<td>{product.name}</td>
@@ -147,7 +159,9 @@ class App extends Component {
 							{ListProduct}
 						</tbody>
 					</table>
-
+					 <button type="button" className="btn btn-warning" onClick = {this.onSetActive} >
+					 		Active : {this.state.isActive === true ?'true' : 'flase'  }
+					 </button>
 
 				{/*<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<div className="panel panel-danger">
